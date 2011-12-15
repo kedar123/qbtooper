@@ -1,0 +1,23 @@
+<%= render :partial => "layouts/header" %>
+<body class="showgrid-off">
+<div class="container">
+  <%= render :partial => "layouts/masthead" %>
+  <div id="maincontent">
+        <% if flash[:notice] %>
+          <div id="notice">
+          <%= flash[:notice] %>
+          </div>
+        <% else %>
+          <div id="notice" style="display:none;">
+          </div>
+        <% end %>
+		<div class="content">
+			<%= yield :layout %>
+		</div>
+    <div class="clear"></div>
+  </div>
+  <%= render :partial => "layouts/footer_nav" %>
+</div>
+<%= yield :footer %> 
+</body>
+</html>

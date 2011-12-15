@@ -1,0 +1,67 @@
+<div id="header">
+  <%= render :partial => "layouts/header_top" %>
+  <div id="global-nav">
+    <ul id="primary-nav">
+      <li id="nav-dashboard"><%= link_to "Dashboard", dashboard_url, :class => "menu-header" %></li>
+      <li id="nav-accounts"><%= link_to "Accounts (GL)", company_accounts_url(current_company), :class => "menu-header" %>
+        <ul>
+          <div class="menu-content">
+            <li class="menu-head">To see your bank accounts</li>
+            <li><%= link_to "Sign in", login_url %></li>
+            <li class="menu-head">Or create a new account</li>
+            <li><%= link_to "Sign up", signup_url %></li>
+          </div>
+        </ul>
+      </li>
+      <li id="nav-invoices"><%= link_to "Customer Invoices (AR)", "#", :class => "menu-header" %>
+        <ul>
+          <div class="menu-content">
+            <li class="menu-head"><%= link_to "Overview", "#" %></li>
+            <li class="menu-head">Invoices</li>
+            <li><%= link_to "Create Invoice", new_company_invoice_path(current_company) %></li>
+            <li><%= link_to "Manage Invoices", company_invoices_path(current_company) %></li>
+            <li class="menu-head">Customers</li>
+            <li><%= link_to "New Customer", new_company_client_path(current_company) %></li>
+            <li><%= link_to "Manage Customers", company_clients_path(current_company) %></li>
+            <li class="menu-head">Configuration</li>
+            <!-- <li><%= link_to "Company Information", "#" %></li> -->
+            <li><%= link_to "Default Values", default_values_company_invoices_path(current_company) %></li>
+            <li><%= link_to "Messages", messages_company_invoices_path(current_company) %></li>
+          </div>
+        </ul>
+      </li>
+      <li id="nav-payees"><%= link_to "Bill Pay (AP)", "#", :class => "menu-header" %>
+		<ul>
+        <div class="menu-content">
+          <li class="menu-head"><%= link_to "Overview", "#" %></li>
+          <li class="menu-head">Bills</li>
+          <li><%= link_to "Create Bill", new_company_bill_path(current_company) %></li>
+          <li><%= link_to "Manage Bills", company_bills_path(current_company) %></li>
+          <li class="menu-head">Payees</li>
+          <!-- <li><%#= link_to "New Payee", new_company_payee_path(current_company) %></li> -->
+          <li><%= link_to "Manage Payees", company_payees_path(current_company) %></li>
+        </div>
+      </ul>
+      </li>
+      <li id="nav-trends"><%= link_to "Reports", trends_path, :class => "menu-header" %>
+        <ul>
+          <div class="menu-content">
+            <li class="menu-head">Reports</li>
+            <li><%= link_to "Trial Balance", trend_path("trial-balance") %></li>
+            <li><%= link_to "Balance Sheet", trend_path("balance-sheet") %></li>
+            <li><%= link_to "Income Statement", trend_path("income-statement") %></li>
+            <li><%= link_to "General Ledger", trend_path("general-ledger") %></li>
+          </div>
+        </ul>
+      </li>
+    </ul><!-- end #primary-nav -->
+    <ul id="secondary-nav">
+      <li id="nav-profile"><%= link_to 'Team Access', company_roles_path(current_company), :class => "menu-header" %></li>
+      <li id="nav-profile"><%= link_to 'Company Settings', edit_company_path(current_company), :class => "menu-header" %></li>
+      <li id="nav-profile"><%= link_to 'Account Settings', edit_company_subscription_path(current_company), :class => "menu-header" %></li>
+
+    </ul><!-- end of #secondary-nav-->
+    <div class="clear"></div>
+  </div>
+  <div class="clear"></div>
+</div>

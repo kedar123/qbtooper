@@ -1,0 +1,9 @@
+<div id="footer" class="transparent">
+      <div class="copyright">&copy;2011-<%= Time.now.year %> Cheqbook.com
+      </div>
+</div>
+<% if current_user -%>
+<script type="text/javascript" charset="utf-8">
+$(function(){ SessionTimer.start(); });
+</script>
+<% end -%>

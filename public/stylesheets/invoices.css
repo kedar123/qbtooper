@@ -1,0 +1,96 @@
+/*
+
+	Styles for Invoices Module
+
+*/
+form > table {
+  width: 50%;
+  float: left;
+}
+
+form > table.full {
+  width: 100%;
+}
+
+form > table.full th {
+  width: 154px;
+}
+
+form > table.items th {
+  text-align: center;
+  font-weight: normal;
+  font-size: 14px;
+  background: #eee;
+}
+
+.form_clearfix {
+  clear: both;
+}
+
+form > table th {
+  background: none;
+  text-align: right;
+  vertical-align: top;
+}
+
+form > table td > span.hint {
+  color: #ccc;
+  font-size: 12px;
+}
+
+form input.date, form input.code {
+  width: 70px;
+}
+
+form input.percent {
+  width: 35px;
+}
+
+form input.number {
+  width: 70px;
+  text-align: right;
+}
+
+form input.subject {
+  width: 90%;
+}
+
+form select.type {
+  width: 90px;
+}
+
+form select.status-select {
+  width: 100px;
+}
+
+form input.item_description {
+  width: 345px;
+}
+
+form textarea {
+  width: 90%;
+  height: 70px;
+}
+
+table .right {
+  text-align: right !important;
+}
+
+table .left {
+  text-align: left !important;
+}
+
+table .center {
+  text-align: center !important;
+}
+
+table .li-amount {
+  font-size: 12px;
+}
+
+a.remove_line_item {
+  font-size: 28px;
+  font-weight: bold;
+  color: red;
+  text-decoration: none;
+}

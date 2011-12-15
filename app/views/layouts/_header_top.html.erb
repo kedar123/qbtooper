@@ -1,0 +1,133 @@
+	<script type="text/javascript">
+	$(function() {
+        $('#user-nav a').click(function (event) {
+            event.stopPropagation();
+        });
+		$("#account_settings_button")
+			.button( {
+                icons: {
+                    primary: "ui-icon-gear",
+                    secondary: "ui-icon-triangle-1-s"
+                },
+                text: false
+			})
+			.mouseenter( function() {
+				var menu = $(this).parent().next().show().position({
+					my: "right top",
+					at: "right bottom",
+					of: this,
+                    collision: "flip"
+				});
+                $(".account_settings").mouseleave(function() {
+					menu.hide();
+				});
+				return false;
+			})
+		.parent()
+			.buttonset()
+		.next()
+			.hide()
+			.menu();
+	});
+    $(function() {
+		$("#company_selection_button")
+			.button( {
+                icons: {
+                    secondary: "ui-icon-triangle-1-s"
+                }
+			})
+			.mouseenter( function() {
+				var menu = $(this).parent().next().show().position({
+					my: "right top",
+					at: "right bottom",
+					of: this,
+                    collision: "flip"
+				});
+                $(".company_selection").mouseleave(function() {
+					menu.hide();
+				});
+				return false;
+			})
+		.parent()
+			.buttonset()
+		.next()
+			.hide()
+			.menu();
+  });
+    $(function() {
+		$("#open_window_button")
+			.button( {
+                icons: {
+                    secondary: "ui-icon-triangle-1-s"
+                }
+			})
+			.mouseenter( function() {
+				var menu = $(this).parent().next().show().position({
+					my: "right top",
+					at: "right bottom",
+					of: this,
+                    collision: "flip"
+				});
+                $(".open_window").mouseleave(function() {
+					menu.hide();
+				});
+				return false;
+			})
+		.parent()
+			.buttonset()
+		.next()
+			.hide()
+			.menu();
+  });
+	</script>
+    <div id="header-top">
+  <%= logo %> <div class="catch_copy">Accounting Simply Done.</div>
+  <% if current_user %>
+  <div id="user-nav">
+	    <div class="open_window">
+	      <div>
+	          <div>
+	              <button id="open_window_button">
+	                Open Window</button>
+	          </div>
+		       <% if session.has_key?("#{current_company.id}") and @from_index == nil %>          
+		         <% arr = session["#{current_company.id}"].to_a %>
+	          <ul>
+	          <% arr.each do |link| %>
+	            <li><%= link_to link[1], link[0] %></li>
+	          <% end %>
+          </ul>
+		      <% end %>
+	      </div>
+	    </div>
+	
+    <div class="company_selection">
+      <div>
+          <div>
+              <button id="company_selection_button">
+                <%= current_company.name %></button>
+          </div>
+          <ul>
+          <% current_user.companies.each do |company| %>
+            <li><%= link_to_unless (company == current_company), company.name, company_accounts_path(company) %></li>
+          <% end %>
+            <li><%= link_to "Add New Company", new_company_url %></li>
+          </ul>
+      </div>
+    </div>
+    <div class="account_settings">
+    <div>
+		<div>
+			<button id="account_settings_button">Account</button>
+		</div>
+		<ul>
+			<li><%= h(current_user.email) %></li>
+			<li><%= link_to "Settings", edit_profile_url %></li>
+			<li><%= link_to "Logout", logout_url %></li>
+		</ul>
+  </div>
+   </div>
+ </div>
+  <% end %>
+  <div class="clear"></div>
+</div>

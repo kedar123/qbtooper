@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+  <%= csrf_meta_tag %>
+  <% session[:page_title] = page_title %> 
+  <title><%=h session[:page_title] %></title>
+  <link rel="Shortcut Icon" href="/favicon.ico">
+
+  <%= include_stylesheets :common, :workspace, :media => 'all' %>
+
+  <%= stylesheet_link_tag "blueprint/print", :media => "print" %>
+  <!--[if IE]>
+    <%= stylesheet_link_tag "blueprint/ie", :media => "screen, projection" %>
+  <![endif]-->
+  <!--[if IE 7]>
+      <%= stylesheet_link_tag "ie7" %>
+  <![endif]-->
+  <!--[if IE 6]>
+      <%= stylesheet_link_tag "ie6" %>
+  <![endif]-->
+
+  <%= include_javascripts :workspace, :payable  %>
+  <%=javascript_include_tag "application.js"%>
+  <% if current_user -%>
+    <% javascript_tag %{wesabe.data.preferences.set(#{current_user.preferences.to_json});} %>
+    <%= javascript_tag %{wesabe.views.shared.loggedIn(true);} %>
+  <% end -%>
+
+  <%= yield :header %>
+</head>

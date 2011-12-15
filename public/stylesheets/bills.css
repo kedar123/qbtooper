@@ -1,0 +1,333 @@
+/*
+
+	Styles for Bills Module
+
+*/
+
+#bill-container {
+	width:100%;
+	margin-left: auto;
+	margin-right: auto;
+	border-left: 1px solid #aaa;
+	border-top: 1px solid #aaa;
+	border-right: 2px solid #bbb;
+	border-bottom: 2px solid #bbb;
+}
+#bill-header {
+	padding: 3px;
+	margin: 5px;
+	}
+
+#bill-border {
+	width: 950px;
+	background-color:#b0c4de;
+	padding-top: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	border-right: 2px solid #aaa;
+	border-bottom: 2px solid #aaa;
+}
+
+#bill-check {
+	background-color:#b0c4de;
+	border: 2px dashed #aaa;
+	padding-top: 35px;
+	margin: 15px;
+	height: 320px;
+}
+
+#bill-header-cell-left {
+	float: left;
+	padding: 40px 50px 40px  0px;
+	width: 410px;
+	/*margin-left: 10%; */
+	background-color: #blue;
+}
+
+#bill-header-fieldname {
+	float:left;
+	height: 35px;
+	margin: 7px 3px 3px 3px;
+	width:120px;
+	text-align:right;
+}
+
+.bill-header-fieldname {
+	float:left;
+	height: 35px;
+	margin: 7px 3px 3px 3px;
+	width:120px;
+	text-align:right;
+	vertical-align: baseline;
+}
+
+#bill-header-fieldvalue {
+	float: left;
+	margin: 3px;
+	padding: 4px;
+}
+
+.bill-header-currency {
+	margin-left: -247px;
+	width:55px;
+}
+.bill_amount {
+	text-align: right;
+	width:165px;
+}
+#bill-header-left {
+
+}
+
+#bill-header-cell-right {
+	float: right;
+	padding: 40px 50px 40px 0px;
+	width: 390px;
+	/*margin-right: 10%; */
+}
+
+#bill-header-right {
+}
+
+#bill-table-row {
+	display: table-row;
+}
+
+#bill-table-cell {
+	display: table-cell;
+}
+
+#bill-table-payable {
+	margin: 10px;
+	display: table-row;
+	width: 100%;
+}
+
+#bill-payable-option {
+	display: table-cell;
+	margin: 5px;
+
+}
+
+.bill-notes {
+	height: 80px;
+
+}
+
+#bill-header #bill-header-fieldvalue select {
+	height: 36px;
+	margin: 0pt;
+	vertical-align: baseline;
+	width: 247px;
+	background-color: #ffffff;
+	border:1px solid #CCC;
+	padding:0px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+    border-radius: 3px;
+	font-family: Verdana,Arial,sans-serif;
+	font-size: 1.1em;
+
+}
+
+/*	Header info for bill expense section /companies/1/bills/new									*/
+/*																								*/
+
+
+ #expense_table_header {
+ 	display: block;
+ 	width: 1060px;
+ 	margin: auto;
+	padding: 2px;
+	padding-botom: 5px;
+	background-color: #eee;
+	margin-top: 50px;
+	border-left: 1px solid #bbb;
+	border-top: 1px solid #bbb;
+	border-right: 2px solid #ccc;
+	border-bottom: 2px solid #ccc;
+ }
+
+
+#expense_header_row {
+	display: table-row;
+	width: 950px;
+	margin: auto;
+	background-color: #eee;
+	padding: 3px;
+}
+
+.expense_header_memo {
+	display: table-cell;
+	width: 350px;
+	border: none;
+	padding: 5px;
+}
+.expense_header_job {
+	display: table-cell;
+	width: 110px;
+	border: none;
+	padding: 5px;
+}
+.expense_header_tax {
+	display: table-cell;
+	width: 100px;
+	border: none;
+	padding: 5px;
+}
+.expense_header_account{
+	display: table-cell;
+	width: 330px;
+	border: none;
+	padding: 5px;
+}
+
+.expense_header_amount {
+	display: table-cell;
+	width: 115px;
+	border: none;
+	padding: 5px;
+}
+expense_header_add {
+	display: table-cell;
+	width: 200px;
+	border: none;
+}
+
+/*	Expense row info for bill expense section /companies/1/bills/new									*/
+/*																								*/
+
+#expense_row {
+	display: block;
+	width: 1050px;
+	border: 1px dashed #ccc;
+	margin: auto;
+	padding: 2px;
+	background-color: #eee;
+}
+
+#expense_memo {
+	display: inline;
+	width: 330px;
+	border: none;
+}
+#expense_job {
+	display: inline;
+	width: 100px;
+	border: none;
+}
+#expense_tax {
+	display: inline;
+	width: 100px;
+	border: none;
+	text-align: right;
+}
+.combobox{
+	display: inline;
+	width: 330px;
+	border: none;
+}
+
+#expense_account{
+	display: inline;
+	width: 330px;
+	border: none;
+}
+#expense_amount {
+	display: inline;
+	width: 100px;
+	border: none;
+	text-align: right;
+}
+
+#expense_add {
+	display: inline;
+	width: 100px;
+	border: none;
+}
+
+.add-bill-button {
+	float: right;
+	color: green;
+	width: 244px;
+	height: 32px;
+    font: normal 14px arial, sans-serif;
+    margin: 16px 10px 16px 16px;
+	border: 0px;
+	background: transparent url('/images/cheqbook-button.png') no-repeat scroll top right;
+}
+
+.add-split-button {
+	color: green;
+	width: 121px;
+	height: 32px;
+    font: normal 14px arial, sans-serif;
+    margin: 0px;
+	border: 0px;
+	background: transparent url('/images/cheqbook-button.png') no-repeat scroll top right;
+}
+.remove-split-button {   
+	color: green;
+	width: 121px; 
+	height: 32px;  
+    font: normal 14px arial, sans-serif; 
+    margin: 0px;
+	border: 0px;
+	background: transparent url('/images/cheqbook-button.png') no-repeat scroll top right;
+}
+
+.money {
+	text-align: right;
+
+}
+
+
+
+.recurring {
+	float: right;
+	margin: -52px 200px 0px 0px;
+}
+/* classes/ids for bill payment methods << RyanB updated : 11-11-11 */
+#payment-method-master{
+    width:1100px;
+}
+.payment-method-sub-wrap{
+    padding-left: 20px;
+    display     : none;
+}
+.payment-method-sub-wrap .payment-method-active{
+    background: #C3D9FF;
+}
+.striped {
+	background-color: #eee;
+}
+#payment_method_exp {
+    border : 3px solid #C3D9FF;
+    height : 200px;
+    display: none;
+}
+#payment_method_exp input[type="text"]{
+    padding: 4px;
+    margin : 2px 0px;
+}
+#payment_method_exp .payment-method-exp-box {
+    display: none;
+}
+#payment_method_exp div#option_name{
+    margin       : -29px -3px 5px -3px;
+    font-size    : 19px;
+    color        : #000;
+    background   : #C3D9FF;
+    width        : auto;
+    padding-left : 5px;
+}
+ #payment_method_exp div#option_name #cancel_link{
+    font-size    : 12px;
+    color        : #043191;
+    padding-left : 8px;
+    cursor       : pointer;
+}
+#payment_method_exp div#option_name #cancel_link:hover{
+    text-decoration: underline;
+}
+/* end of bill payment methods */

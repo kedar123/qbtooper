@@ -1,0 +1,21 @@
+<h1>Listing testmealls</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @testmealls.each do |testmeall| %>
+  <tr>
+    <td><%= link_to 'Show', testmeall %></td>
+    <td><%= link_to 'Edit', edit_testmeall_path(testmeall) %></td>
+    <td><%= link_to 'Destroy', testmeall, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Testmeall', new_testmeall_path %>
