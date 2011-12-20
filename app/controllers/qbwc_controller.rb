@@ -93,8 +93,8 @@ class QbwcController < ApplicationController
       
  
             if sendquery.querystatus == "billquery"
-        maxreturn = 50
-        maxreturn = sendquery.iteratorremaining  if sendquery.iteratorremaining < 50
+        maxreturn = 25
+        maxreturn = sendquery.iteratorremaining  if sendquery.iteratorremaining < 25
         if  sendquery.iteratorremaining   > 0
           builder = Builder::XmlMarkup.new
           xml = builder.BillQueryRq(:iterator=>"Continue",:iteratorID=>sendquery.continueid) { |b| b.MaxReturned(maxreturn);b.IncludeLineItems(true) }      
@@ -108,16 +108,16 @@ class QbwcController < ApplicationController
         end
       end
       
-                  if sendquery.querystatus == "VendorQueryRq"
-        maxreturn = 25
-        maxreturn = sendquery.iteratorremaining  if sendquery.iteratorremaining < 25
+                  if sendquery.querystatus == "vendorquery"
+        maxreturn = 10
+        maxreturn = sendquery.iteratorremaining  if sendquery.iteratorremaining < 10
         if  sendquery.iteratorremaining.to_i   > 0  
           builder = Builder::XmlMarkup.new
           xml = builder.VendorQueryRq(:iterator=>"Continue",:iteratorID=>sendquery.continueid) { |b| b.MaxReturned(maxreturn); }
         else
            xml = <<-REQUEST
                   <BillQueryRq requestID="2"  iterator="Start">
-                  <MaxReturned>50</MaxReturned>
+                  <MaxReturned>5</MaxReturned>
                     <IncludeLineItems>true</IncludeLineItems>
                     <IncludeLinkedTxns>true</IncludeLinkedTxns>
                   </BillQueryRq>
@@ -133,10 +133,10 @@ class QbwcController < ApplicationController
 
       
                 if sendquery.querystatus == "InvoiceQueryRq"
-        maxreturn = 20
+        maxreturn = 10
          logger.info "im not nil here"
          logger.info  sendquery.iteratorremaining
-        maxreturn = sendquery.iteratorremaining  if sendquery.iteratorremaining < 20
+        maxreturn = sendquery.iteratorremaining  if sendquery.iteratorremaining < 10
         if  sendquery.iteratorremaining   > 0
           builder = Builder::XmlMarkup.new
           xml = builder.InvoiceQueryRq(:iterator=>"Continue",:iteratorID=>sendquery.continueid) { |b| b.MaxReturned(maxreturn);b.IncludeLineItems(true) }      
@@ -163,7 +163,7 @@ class QbwcController < ApplicationController
         else
            xml = <<-REQUEST
               <InvoiceQueryRq   iterator="Start">
-                  <MaxReturned>20</MaxReturned>
+                  <MaxReturned>5</MaxReturned>
                 <IncludeLineItems>true</IncludeLineItems>
                  
               </InvoiceQueryRq>
@@ -201,8 +201,8 @@ class QbwcController < ApplicationController
      
       
       if sendquery.querystatus == "itemquery"
-        maxreturn = 20
-        maxreturn = sendquery.iteratorremaining  if sendquery.iteratorremaining < 20
+        maxreturn = 10
+        maxreturn = sendquery.iteratorremaining  if sendquery.iteratorremaining < 10
         if  sendquery.iteratorremaining   > 0
           builder = Builder::XmlMarkup.new
           xml = builder.ItemQueryRq(:iterator=>"Continue",:iteratorID=>sendquery.continueid) { |b| b.MaxReturned(maxreturn); }      
@@ -235,7 +235,7 @@ class QbwcController < ApplicationController
       elsif sendquery.querystatus == "companyquery"
         xml = <<-REQUEST
               <ItemQueryRq requestID="255" iterator="Start">
-                    <MaxReturned>20</MaxReturned>
+                    <MaxReturned>10</MaxReturned>
               </ItemQueryRq>
         REQUEST
         sendquery.querystatus = "itemquery"
@@ -253,7 +253,7 @@ class QbwcController < ApplicationController
        elsif sendquery.querystatus == "TransactionQueyRq"
         xml = <<-REQUEST
               <CustomerQueryRq requestID="27" iterator="Start">
-                    <MaxReturned>25</MaxReturned>
+                    <MaxReturned>20</MaxReturned>
               </CustomerQueryRq>
         REQUEST
         sendquery.querystatus = "customerqueryreq"
@@ -262,7 +262,7 @@ class QbwcController < ApplicationController
       elsif sendquery.querystatus == "customerqueryreq"
         xml = <<-REQUEST
               <InvoiceQueryRq   iterator="Start">
-                  <MaxReturned>20</MaxReturned>
+                  <MaxReturned>5</MaxReturned>
                 <IncludeLineItems>true</IncludeLineItems>
                  
               </InvoiceQueryRq>
@@ -273,7 +273,7 @@ class QbwcController < ApplicationController
       elsif sendquery.querystatus == "InvoiceQueryRq"
         xml = <<-REQUEST
               <VendorQueryRq requestID="1" iterator="Start">
-                  <MaxReturned>25</MaxReturned>
+                  <MaxReturned>5</MaxReturned>
               </VendorQueryRq>
         REQUEST
         sendquery.querystatus = "vendorquery"
@@ -282,7 +282,7 @@ class QbwcController < ApplicationController
       elsif sendquery.querystatus == "vendorquery"
             xml = <<-REQUEST
                   <BillQueryRq requestID="2"  iterator="Start">
-                  <MaxReturned>50</MaxReturned>
+                  <MaxReturned>5</MaxReturned>
                     <IncludeLineItems>true</IncludeLineItems>
                     <IncludeLinkedTxns>true</IncludeLinkedTxns>
                   </BillQueryRq>
@@ -299,6 +299,13 @@ class QbwcController < ApplicationController
         xml = ""
       end
     end
+    
+    xml = <<-REQUEST 
+         
+	    <ItemSalesTaxQueryRq requestID="4">
+	    </ItemSalesTaxQueryRq>
+	   
+         REQUEST
     logger.info "xml request send"
     logger.info  wrap_qbxml_request(xml)
     wrap_qbxml_request(xml)
@@ -369,9 +376,19 @@ class QbwcController < ApplicationController
         Item.quickbook_item_import(ticket,@xml)
       end
       if @xml['QBXMLMsgsRs'].keys[0].to_s == "VendorQueryRs"
-            
+            logger.info "caling vendor query"
+             sendquery.continueid = @xml['QBXMLMsgsRs']["VendorQueryRs"]["iteratorID"]
+        sendquery.iteratorremaining = @xml['QBXMLMsgsRs']["VendorQueryRs"]["iteratorRemainingCount"]
+        sendquery.save
         MerchantInfo.quickbook_vendor_import(@xml)
       end
+      
+      if @xml['QBXMLMsgsRs'].keys[0].to_s == "ItemSalesTaxQueryRq"
+            logger.info "caling ItemSalesTaxQueryRq query"
+            logger.info @xml['QBXMLMsgsRs']["ItemSalesTaxQueryRq"]  
+      end      
+
+
     else
        logger.info "im herererfff34"
       if !@xml['QBXML'].blank?
@@ -412,8 +429,18 @@ class QbwcController < ApplicationController
           Bill.quickbook_bill_import(ticket,@xml)
         end
         if @xml['QBXML']['QBXMLMsgsRs'].keys[0].to_s == "VendorQueryRs"
+          sendquery.continueid = @xml['QBXML']['QBXMLMsgsRs']["VendorQueryRs"]["iteratorID"]
+        sendquery.iteratorremaining = @xml['QBXML']['QBXMLMsgsRs']["VendorQueryRs"]["iteratorRemainingCount"]
+        sendquery.save
           MerchantInfo.quickbook_vendor_import(@xml) 
         end
+        
+            if @xml['QBXML']['QBXMLMsgsRs'].keys[0].to_s == "ItemSalesTaxQueryRq"
+            logger.info "caling ItemSalesTaxQueryRq query"
+            logger.info @xml['QBXML']['QBXMLMsgsRs']["ItemSalesTaxQueryRq"]  
+      end    
+     
+ 
       end
     end
     sendquery = QuickbooksImportStatus.find_by_token("kedar.pathak@pragtech.co.in")

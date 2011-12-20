@@ -29,8 +29,8 @@ class Txaction < ActiveRecord::Base
     end
   end
   def self.call_transaction_save(transaction,token)
-  #  logger.info "this is transaction"
-  #  logger.info transaction
+    logger.info "this is transaction"
+    logger.info transaction
     
 #     if transaction.class.to_s == "Hash"
 #      tagid = Tag.find(:first,:conditions=>["normalized_name = ?",transaction['AccountRef']['FullName']])
